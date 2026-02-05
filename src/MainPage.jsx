@@ -7,7 +7,7 @@ import { useAuth } from './routes/AuthProvider';
 import { RecentlyViewed } from './componentes/RecentlyViewed';
 import { ProfileCompletionModal } from './componentes/ProfileCompletionModal';
 import useSearchFilter from './hooks/useSearchFilter';
-import ChatbaseBot from './componentes/ChatbaseBot';
+import ChatbaseBot from '@/componentes/ChatbaseBot';
 import { Navigate } from 'react-router-dom';
 import * as Sentry from '@sentry/react';
 
@@ -176,7 +176,6 @@ export const TerrenosCompare = () => {
   }
 
   return (
-    
     <div className="min-h-screen bg-gradient-to-b from-emerald-50 via-emerald-50 to-amber-50 dark:from-neutral-950 dark:via-neutral-950 dark:to-neutral-900 text-neutral-800 dark:text-neutral-100">
       <ChatbaseBot />
       <Header  />

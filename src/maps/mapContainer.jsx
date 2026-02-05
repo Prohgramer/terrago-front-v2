@@ -1,17 +1,66 @@
+import { formatearGuaranies } from '@/utils/formatters';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 
+// Constante con los límites del área urbana de Asunción
+const LIMITES_ASUNCION = [
+
+  [-25.35585199517452, -57.5699024315337],
+  [-25.35024951082645, -57.57306452756903],
+  [-25.347740114587317, -57.575942977207255],
+  [-25.34410858255803, -57.580827348347555],
+  [-25.339268468023654, -57.58494756679606],
+  [-25.320083203285, -57.560036033259486],
+  [-25.309533008597327, -57.55372125992591],
+  [-25.309296476297746, -57.55254153362284],
+  [-25.307326115572668, -57.55100223978491],
+  [-25.30002653981804, -57.54618562381503],
+  [-25.29632267172524, -57.5434775014992],
+  [-25.294199289769523, -57.543742294738934],
+  [-25.292618690235358, -57.542927992081914],
+  [-25.292364575948334, -57.542277070694375],
+  [-25.29181635408531, -57.54171908927151],
+  [-25.29568156962197, -57.53599690447711],
+  [-25.298866607284044, -57.534313546382464],
+  [-25.302537381116508, -57.53336282320885],
+  [-25.30449162143271, -57.53102179590843],
+  [-25.307726378452866, -57.52829002998356],
+  [-25.311414181946482, -57.52571073937116],
+  [-25.314263070818527, -57.5229849217734],
+  [-25.316703510407624, -57.520820790948854],
+  [-25.318746587381675, -57.51821707917206],
+  [-25.32020789250506, -57.51884059821812],
+  [-25.320790539991485, -57.520136478638065],
+  [-25.321470226758713, -57.5195534881488],
+  [-25.323221116284508, -57.52126348199374],
+  [-25.320818989493425, -57.523473109769796],
+  [-25.32285465254743, -57.52592668770899],
+  [-25.325444224043395, -57.52866835630986],
+  [-25.325676158867, -57.52716024256203],
+  [-25.328901223715235, -57.52735751260906],
+  [-25.3338111270011, -57.52748711299762],
+  [-25.333392766141817, -57.53166744866954],
+  [-25.333170758693875, -57.534146750827524],
+  [-25.334615202262, -57.53467277039323],
+  [-25.332567071812566, -57.5400951696922],
+  [-25.336766318181645, -57.54302866663457],
+  [-25.34096556455073, -57.54596216357693],
+  [-25.35013107492592, -57.550980474008114],
+  [-25.356927735776868, -57.551994637929354],
+  [-25.35585199517452, -57.5699024315337]
+
+];
 
 export const MapContainer = ({ selectedProperty }) => {
   const mapRef = React.useRef(null);
   const leafletMapRef = React.useRef(null);
   const currentMarkerRef = React.useRef(null);
-  const [currentLayer, setCurrentLayer] = useState('street'); // 'street' o 'satellite'
+  const asuncionAreaRef = React.useRef(null); // Nueva referencia para el área
   
   useEffect(() => {
     if (!selectedProperty && leafletMapRef.current) {
       // Volver a la vista general cuando no hay selección
-      leafletMapRef.current.flyTo([-25.2867, -57.3333], 12, {
+      leafletMapRef.current.flyTo([-25.2822, -57.6351], 12, {
         duration: 1.5
       });
       
@@ -46,12 +95,13 @@ export const MapContainer = ({ selectedProperty }) => {
 
       if (window.L && !leafletMapRef.current) {
         leafletMapRef.current = window.L.map(mapRef.current, {
-        center: [-25.2637, -57.5759],
-        zoom: 12,
-        minZoom: 8,
-        maxZoom: 17,
-        zoomControl: true,
-});
+          center: [-25.2822, -57.6351],
+          zoom: 12,
+          minZoom: 8,
+          maxZoom: 17,
+          zoomControl: true,
+        });
+        
         // Definir las capas
         const streetLayer = window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '© OpenStreetMap contributors',
@@ -73,6 +123,17 @@ export const MapContainer = ({ selectedProperty }) => {
         };
 
         window.L.control.layers(baseLayers, {}).addTo(leafletMapRef.current);
+
+        // Agregar el área urbana de Asunción
+        asuncionAreaRef.current = window.L.polygon(LIMITES_ASUNCION, {
+          color: '#f97316',
+          fillColor: '#f97316',
+          fillOpacity: 0.15,
+          weight: 2,
+          dashArray: '5, 10'
+        }).addTo(leafletMapRef.current);
+
+        asuncionAreaRef.current.bindPopup('<b>Asunción</b><br>Área urbana');
       }
     };
 
@@ -122,22 +183,20 @@ export const MapContainer = ({ selectedProperty }) => {
         ${selectedProperty.address}
       </div>
       <div style="color: #f97316; font-size: 1.1rem; font-weight: 600;">
-        ${selectedProperty.price}
+        ${ formatearGuaranies(selectedProperty.price)}
       </div>
     `;
 
     currentMarkerRef.current.bindPopup(popupContent).openPopup();
 
     // Centrar mapa con animación
-    leafletMapRef.current.flyTo([selectedProperty.lat || -25.33, selectedProperty.lng || -15.33], 15, {
+    leafletMapRef.current.flyTo([selectedProperty.lat || -25.33, selectedProperty.lng || -57.6351], 15, {
       duration: 1.5
     });
   }, [selectedProperty]);
 
   return (
     <div className="relative bg-gray-900 h-screen">
-      {/* <MapHeader selectedProperty={selectedProperty} />
-      <NoSelection show={!selectedProperty} /> */}
       {!selectedProperty && (
         <div className="absolute inset-0 z-[400] bg-black/50 flex items-center justify-center text-white pointer-events-none">
           <p className="text-center p-4">

@@ -18,6 +18,7 @@ import { Toaster } from 'react-hot-toast';
 import { UserOnboardingStepper } from '@/componentes/UserOnboardingStepper';
 import { AdminDashboard } from '../pages/AdminDashboard';
 import { AdminRoute } from './AdminRoute';
+import TerrenosMap from '@/componentes/RecommendationV3';
 
 const ProtectedRoute = ({ children }) => {
 	const { loggedIn } = useAuth();
@@ -35,7 +36,8 @@ export default function AppRoutes() {
 						<Toaster position="top-right" />
 
 						<Routes>
-							<Route path="/" element={<TerrenosCompare />} />
+							<Route path="/" element={<TerrenosCompare />} /> 
+							{/* <Route path="/" element={<TerrenosMap />} /> */}
 							<Route path="/userOnboarding" element={<UserOnboardingStepper />} />
 							<Route path="/register" element={<RegisterPage />} />
 							<Route path="/verify-email" element={<VerifyEmail />} />
@@ -59,7 +61,7 @@ export default function AppRoutes() {
 															<CompararTerrenos />
 														</LayoutMain>} />
 							<Route path="/recomendaciones" element={
-															<RecommendationsPage />
+															<TerrenosMap />
 														} />
 							<Route
 								path="/admin"

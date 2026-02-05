@@ -1,5 +1,6 @@
 import { consoleLoggingIntegration } from '@sentry/react';
 import React, { createContext, useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const CompareContext = createContext();
 
@@ -19,8 +20,8 @@ export function CompareProvider({ children }) {
         return newList;
       }
       
-      if (prev.length >= 4) {
-        alert('Máximo 4 terrenos para comparar');
+      if (prev.length >= 2) {
+        toast.error('Maximo 2 terrenos para comparar');
         return prev;
       }
       

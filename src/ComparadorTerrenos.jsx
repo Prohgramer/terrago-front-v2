@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Check, X } from 'lucide-react';
 import { useCompare } from './contexto/CompareContext';
 import './comparadorTerrenos.css';
+import { formatearGuaranies } from './utils/formatters';
 
 export const CompararTerrenos = () => {
   const { ids } = useParams();
@@ -53,15 +54,7 @@ export const CompararTerrenos = () => {
     <>
       <div className="container">
         <div className="comparison-container">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-2xl font-bold">Comparar ({displayedTerrenos.length}/3)</h1>
-            <button
-              onClick={() => navigate(-1)}
-              className="text-neutral-600 hover:text-neutral-900 flex items-center gap-2"
-            >
-              <ArrowLeft className="w-5 h-5" /> Volver
-            </button>
-          </div>
+
 
           <table>
             <thead>
@@ -97,7 +90,7 @@ export const CompararTerrenos = () => {
                 <td>Precio</td>
                 {displayedTerrenos.map((terreno) => (
                   <td key={terreno._id} className="property-column">
-                    {terreno.cuota ? `Desde Gs. ${terreno.cuota}` : '-'}
+                    {terreno.cuota ? `Desde Gs. ${formatearGuaranies(terreno.cuota)}` : '-'}
                   </td>
                 ))}
               </tr>

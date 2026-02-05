@@ -43,7 +43,7 @@ export const Header = ({ onSectionChange }) => {
               >
                 <Trees className="w-5 h-5" />
               </motion.div>
-              <span className="font-extrabold tracking-tight text-xl">TERRAGO</span>
+              <span className="font-extrabold tracking-tight text-xl">TERREGO</span>
             </Link>
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm">

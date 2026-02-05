@@ -1,3 +1,4 @@
+import { formatearGuaranies } from '@/utils/formatters';
 import React, { useState, useEffect, useRef } from 'react';
 
 export const MapContainerDetail = ({ selectedProperty, cercanias }) => {
@@ -122,7 +123,7 @@ export const MapContainerDetail = ({ selectedProperty, cercanias }) => {
         ${selectedProperty.ciudad || 'Sin dirección'}
       </div>
       <div style="color: #f97316; font-size: 1.1rem; font-weight: 600;">
-        ${selectedProperty.cuota || 'Consultar'}
+        ${formatearGuaranies(selectedProperty.cuota) || 'Consultar'}
       </div>
     `;
 

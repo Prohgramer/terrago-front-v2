@@ -243,16 +243,7 @@ export const RegisterPage = () => {
                 </p>
               )}
             </div>
-            <label className="flex items-center gap-2">
-              <input 
-                type="checkbox" 
-                name="acceptMarketing"
-                checked={formData.acceptMarketing}
-                onChange={handleInputChange}
-                className="accent-emerald-600" 
-              />
-              Deseo recibir ofertas y noticias por email
-            </label>
+
           </div>
 
           <button

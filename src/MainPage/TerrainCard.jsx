@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Heart, Scale } from "lucide-react";
 import { useFavorites } from '@/hooks/useFavorites';
 import { useCompare } from '@/contexto/CompareContext';
-
+import { formatearGuaranies } from '@/utils/formatters';
 
 
 export const TerrainCard = ({ terreno,onSelect }) => {
@@ -108,7 +108,7 @@ export const TerrainCard = ({ terreno,onSelect }) => {
               <p className="font-semibold leading-snug">{terreno.titulo}</p>
               <p className="text-xs opacity-70">{terreno.ciudad}</p>
             </div>
-            <p className="font-extrabold text-emerald-700 dark:text-emerald-300">{terreno.cuota}</p>
+            <p className="font-extrabold text-emerald-700 dark:text-emerald-300">{formatearGuaranies(terreno.cuota)}</p>
           </div>
           <div className="mt-3 flex items-center gap-2">
             <Button 

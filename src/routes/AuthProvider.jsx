@@ -28,6 +28,8 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         localStorage.removeItem('authToken');
         localStorage.removeItem('userData');
+
+        window.location.href = '/';
     };
 
     // Add updateUser function

@@ -6,6 +6,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Share2, Heart, Printer } from 'lucide-react';
 import { MapContainerDetail } from '@/Register/MapContainerDetail';
 import { useRecentlyViewed } from '@/hooks/useRecentlyViewed';
+import { useFavorites } from '@/hooks/useFavorites';
 
 export const TerrainDetail = () => {
   const { id } = useParams();
@@ -13,6 +14,19 @@ export const TerrainDetail = () => {
   const { terrain, loading, error } = useTerrainDetail(id);
   const { addToRecentlyViewed } = useRecentlyViewed();
   //console.log(terrain.cercanias);
+  
+  const { toggleFavorite, loading: favLoading, isFavorite } = useFavorites();
+
+  const handleFavoriteClick = async (e) => {
+    e?.stopPropagation();
+    if (favLoading) return;
+    try {
+      await toggleFavorite(terrain._id);
+    } catch (err) {
+      console.error('favorite error', err);
+    }
+  };
+
   const [selectedImage, setSelectedImage] = useState(0);
   React.useEffect(() => {
     if (terrain) {
@@ -73,12 +87,23 @@ export const TerrainDetail = () => {
           </div>
 
           <div className="flex gap-3">
-            <Button variant="ghost" size="icon">
-              <Heart className="w-5 h-5" />
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={handleFavoriteClick}
+              disabled={favLoading}
+              className={favLoading ? 'opacity-60 cursor-not-allowed' : ''}
+            >
+              <Heart className={`w-5 h-5 ${
+                  isFavorite(terrain._id)
+                    ? 'fill-red-500 text-red-500'
+                    : 'text-gray-600 dark:text-gray-300'
+                }`}
+              />
             </Button>
-            <Button variant="ghost" size="icon">
+            {/* <Button variant="ghost" size="icon">
               <Share2 className="w-5 h-5" />
-            </Button>
+            </Button> */}
           </div>
         </div>
 
@@ -146,23 +171,6 @@ export const TerrainDetail = () => {
               cercanias={/*cercaniasData*/ terrain.cercanias}
             /> 
 
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-4">Contactar vendedor</h3>
-              <a 
-                  // 1. URL a la que deseas enviar al usuario.
-                  href={terrain.url} 
-                  
-                  // 2. Opcional, pero recomendado: Abre el enlace en una nueva pestaña.
-                  target="_blank" 
-                  
-                  // 3. Recomendado para seguridad si usas target="_blank".
-                  rel="noopener noreferrer"
-              >
-                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
-                      Contacto
-                  </Button>
-              </a>
-            </Card>
           </div>
         </div>
       </div>

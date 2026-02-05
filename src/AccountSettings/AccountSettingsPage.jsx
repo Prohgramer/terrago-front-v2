@@ -59,9 +59,9 @@ export const AccountSettingsPage = () => {
 
   const menuItems = [
     { id: 'profile', label: 'Mi cuenta', icon: User, color: 'emerald' },
-    { id: 'recent', label: 'Vistos recientemente', icon: Clock, color: 'blue' },
+    
     { id: 'favorites', label: 'Favoritos', icon: Heart, color: 'rose' },
-    { id: 'help', label: 'Ayuda y soporte', icon: HelpCircle, color: 'purple' }
+
   ];
 
   // Calcular progreso del perfil
@@ -354,7 +354,7 @@ export const AccountSettingsPage = () => {
                         name="phone"
                         value={profileData.phone}
                         onChange={handleInputChange}
-                        placeholder="+595 21 123 4567"
+                        placeholder="+595 9XX 123 4567"
                         className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-700 text-neutral-100 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
                       />
                     </div>
