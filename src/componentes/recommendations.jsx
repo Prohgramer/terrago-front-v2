@@ -9,7 +9,7 @@ export default function Recommendations({ userId }) {
   useEffect(() => {
     const fetchRecs = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/recommendations/recommendations/${userId}`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recommendations/recommendations/${userId}`);
         const data = await res.json();
         console.log(JSON.stringify(data, null, 2));
         if (data.success) setRecs(data.recommendations);

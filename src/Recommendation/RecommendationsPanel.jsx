@@ -14,7 +14,7 @@ export const RecommendationsPanel = ({ userId }) => {
   useEffect(() => {
     const fetchRecommendations = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/recommendations/recommendations/${userId}`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recommendations/recommendations/${userId}`);
         const data = await res.json();
         if (data.success) {
           setRecommendations(data.recommendations);

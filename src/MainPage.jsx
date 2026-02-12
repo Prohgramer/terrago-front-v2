@@ -66,7 +66,7 @@ export const TerrenosCompare = () => {
         'Content-Type': 'application/json'
       };
 
-      const res = await fetch(`http://localhost:5000/api/resultados?${params.toString()}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/resultados?${params.toString()}`, {
         headers
       });
       
@@ -95,7 +95,7 @@ export const TerrenosCompare = () => {
       if (!user) return;
       setUserId(user?.id || null);
       try {
-        const res = await fetch(`http://localhost:5000/api/users/${user.id}/progress`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${user.id}/progress`);
         const data = await res.json();
         if (data.success) setProfileData(data);
       } catch (err) {

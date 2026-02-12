@@ -25,7 +25,7 @@ export default function VerifyEmail() {
       }
 
       // Llamar al endpoint de verificación
-      const response = await fetch('http://localhost:5000/api/auth/verify-email', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/verify-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

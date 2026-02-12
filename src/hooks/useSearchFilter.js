@@ -13,7 +13,7 @@ const useSearchFilter = () => {
 
         try {
             const token = localStorage.getItem('authToken');
-            const res = await fetch(`http://localhost:5000/api/terrains/search?page=${page}&per_page=${perPage}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/terrains/search?page=${page}&per_page=${perPage}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

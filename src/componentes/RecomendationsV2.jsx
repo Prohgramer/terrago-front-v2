@@ -68,7 +68,7 @@ const TerrenosMap = () => {
 useEffect(() => {
     const fetchRecs = async () => {
         try {
-            const res = await fetch(`http://localhost:5000/api/recommendations/recommendations`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recommendations/recommendations`, {
                 method: 'POST', // 1. Especificar el método
                 headers: {
                     'Content-Type': 'application/json' // 2. Decirle al server que envías JSON

@@ -27,8 +27,8 @@ export const useFavorites = () => {
       setFavoritesList(newFavorites);
 
       const endpoint = isCurrentlyFavorite 
-        ? `http://localhost:5000/api/favoritos/${loteId}`
-        : 'http://localhost:5000/api/favoritos';
+        ? `${import.meta.env.VITE_API_URL}/${loteId}`
+        : `${import.meta.env.VITE_API_URL}/favoritos`;
 
       const response = await fetch(endpoint, {
         method: isCurrentlyFavorite ? 'DELETE' : 'POST',

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 // Definir la URL base de la API
-const API_BASE_URL = 'http://localhost:5000'; // Ajusta esto según tu configuración
 
 export const useTerrainDetail = (id) => {
   const [terrain, setTerrain] = useState(null);
@@ -12,7 +11,7 @@ export const useTerrainDetail = (id) => {
   useEffect(() => {
     const fetchTerrain = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/resultados/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/resultados/${id}`);
         if (!response.ok) throw new Error('No se pudo obtener el terreno');
         const data = await response.json();
         console.log('Terrain data fetched:', data);

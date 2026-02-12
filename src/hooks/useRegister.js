@@ -5,8 +5,6 @@ const useRegister = () => {
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
 
-  // Configuración de la API
-  const API_BASE_URL =  'http://localhost:5000'  // process.env.REACT_APP_API_URL ||;
 
   // Función para limpiar errores
   const clearErrors = useCallback(() => {
@@ -17,7 +15,7 @@ const useRegister = () => {
   // Validación de email en tiempo real
   const checkEmailExists = useCallback(async (email) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/check-email`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/check-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

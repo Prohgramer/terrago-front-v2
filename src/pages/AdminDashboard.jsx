@@ -9,7 +9,7 @@ export const AdminDashboard = () => {
   useEffect(() => {
     // Solo admins pueden cargar usuarios
     if (user?.type_user === "admin") {
-      fetch("http://localhost:5000/api/users", {
+      fetch(`${import.meta.env.VITE_API_URL}/api/users`, {
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("authToken")}`,
         },

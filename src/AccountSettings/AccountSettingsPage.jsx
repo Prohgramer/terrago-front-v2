@@ -79,7 +79,7 @@ export const AccountSettingsPage = () => {
     try {
       console.log(user.favorites)
       const lotesPromises = user.favorites.map(async (loteId) => {
-        const loteResponse = await fetch(`http://localhost:5000/api/resultados/${loteId}`, {
+        const loteResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/resultados/${loteId}`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('authToken')}`
           }
