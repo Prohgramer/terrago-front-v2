@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { useProfile } from '../hooks/useProfile';
 import { toast } from 'react-hot-toast';
+import { formatearGuaranies } from '@/utils/formatters';
 
 export const AccountSettingsPage = () => {
   const navigate = useNavigate();
@@ -32,7 +33,6 @@ export const AccountSettingsPage = () => {
   const [favorites, setFavorites] = useState([]);
   const [saveStatus, setSaveStatus] = useState('idle'); // idle, saving, success, error
 
-  console.log(JSON.stringify(user, null, 2));
   
   const [profileData, setProfileData] = useState({
     firstName: user?.name || '',
@@ -77,7 +77,6 @@ export const AccountSettingsPage = () => {
 
   const fetchFavorites = async () => {
     try {
-      console.log(user.favorites)
       const lotesPromises = user.favorites.map(async (loteId) => {
         const loteResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/resultados/${loteId}`, {
           headers: {
@@ -658,7 +657,7 @@ export const AccountSettingsPage = () => {
                           <MapPin className="w-4 h-4" />
                           {item.ciudad}
                         </p>
-                        <p className="text-rose-400 font-bold mt-2 text-xl">Gs. {item.cuota}</p>
+                        <p className="text-rose-400 font-bold mt-2 text-xl">Gs. {formatearGuaranies(item.cuota)}</p>
                       </div>
                       <button className="text-rose-500 hover:text-rose-400 transition-colors p-3 hover:bg-rose-500/10 rounded-xl">
                         <Heart className="w-6 h-6 fill-current" />

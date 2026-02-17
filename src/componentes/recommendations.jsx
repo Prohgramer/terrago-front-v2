@@ -4,14 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function Recommendations({ userId }) {
   const [loading, setLoading] = useState(true);
   const [recs, setRecs] = useState([]);
-  console.log("UserID for recommendations:", userId);
 
   useEffect(() => {
     const fetchRecs = async () => {
       try {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recommendations/recommendations/${userId}`);
         const data = await res.json();
-        console.log(JSON.stringify(data, null, 2));
         if (data.success) setRecs(data.recommendations);
       } catch (error) {
         console.error("Error fetching recommendations:", error);

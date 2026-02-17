@@ -37,7 +37,6 @@ export const TerrainDetail = () => {
   if (loading) return <div className="flex items-center justify-center min-h-screen">Cargando...</div>;
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
   if (!terrain) return <div className="text-center p-6">No se encontró el terreno</div>;
-  console.log(terrain);
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900">
       {/* Galería de imágenes */}

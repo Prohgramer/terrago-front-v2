@@ -34,7 +34,6 @@ export const TerrenosCompare = () => {
   const [searchActive, setSearchActive] = useState(false);
   const [currentSearchFilters, setCurrentSearchFilters] = useState(null);
   const { loggedIn, user, logout } = useAuth();
-  console.log("Usuario en MainPage:", JSON.stringify(user, null, 2));
 
   // hook de búsqueda
   const { 

@@ -18,7 +18,6 @@ export const TerrainCard = ({ terreno,onSelect }) => {
     const handleCompareClick = (e) => {
       e.stopPropagation();
       toggleCompare(terreno);
-      console.log(terreno)
     };
 
     const handleCardClick = () => {
@@ -41,21 +40,14 @@ export const TerrainCard = ({ terreno,onSelect }) => {
     if (loading) return;
 
     try {
-      await toggleFavorite(terreno._id);
-      
-      // toast({
-      //   title: isFavorite(terreno._id) ? "Eliminado de favoritos" : "Agregado a favoritos",
-      //   description: isFavorite(terreno._id) 
-      //     ? "El terreno se eliminó de tu lista de favoritos"
-      //     : "El terreno se agregó a tu lista de favoritos",
-      //   variant: "default",
-      // });
+      const result = await toggleFavorite(terreno._id);
+
     } catch (error) {
-      // toast({
-      //   title: "Error",
-      //   description: "No se pudo actualizar favoritos. Por favor, intenta nuevamente.",
-      //   variant: "destructive",
-      // });
+       toast({
+         title: "Error",
+         description: "No se pudo actualizar favoritos. Por favor, intenta nuevamente.",
+         variant: "destructive",
+       });
     }
   };
 

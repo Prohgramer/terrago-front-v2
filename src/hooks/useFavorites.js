@@ -27,8 +27,8 @@ export const useFavorites = () => {
       setFavoritesList(newFavorites);
 
       const endpoint = isCurrentlyFavorite 
-        ? `${import.meta.env.VITE_API_URL}/${loteId}`
-        : `${import.meta.env.VITE_API_URL}/favoritos`;
+        ? `${import.meta.env.VITE_API_URL}/api/favoritos/${loteId}`
+        : `${import.meta.env.VITE_API_URL}/api/favoritos`;
 
       const response = await fetch(endpoint, {
         method: isCurrentlyFavorite ? 'DELETE' : 'POST',
@@ -66,6 +66,13 @@ export const useFavorites = () => {
           ...user,
           favorites: newFavorites
         });
+
+        if (isCurrentlyFavorite) {
+          toast.success('Eliminado de favoritos');
+        } else {
+          toast.success('Agregado a favoritos');
+        }
+
       }
 
       return data;

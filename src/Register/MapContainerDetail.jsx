@@ -2,8 +2,7 @@ import { formatearGuaranies } from '@/utils/formatters';
 import React, { useState, useEffect, useRef } from 'react';
 
 export const MapContainerDetail = ({ selectedProperty, cercanias }) => {
-  console.log(selectedProperty)
-  console.log(cercanias)
+
   const mapRef = useRef(null);
   const leafletMapRef = useRef(null);
   const currentMarkerRef = useRef(null);

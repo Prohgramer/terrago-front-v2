@@ -23,7 +23,6 @@ const stepIcons = {
 export const UserOnboardingStepper = ({ onFinish }) => {
   const { user, updateUser } = useAuth(); // <-- asegúrate de tener updateUser
   const navigate = useNavigate();
-  console.log("Usuario en UserOnboardingStepper:", JSON.stringify(user, null, 2));
   const [activeStep, setActiveStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -77,7 +76,6 @@ export const UserOnboardingStepper = ({ onFinish }) => {
       });
       if (!res.ok) throw new Error("Error al actualizar perfil");
       const data = await res.json();
-      console.log("Perfil actualizado:", data);
 
       // Actualiza el usuario en el contexto
       updateUser({

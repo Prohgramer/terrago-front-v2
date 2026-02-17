@@ -29,7 +29,7 @@ const useRegister = () => {
       console.error('Error al verificar email:', error);
       return false;
     }
-  }, [API_BASE_URL]);
+  }, [import.meta.env.VITE_API_URL]);
 
   // Función principal de registro
   const register = useCallback(async (formData) => {
@@ -48,7 +48,7 @@ const useRegister = () => {
         acceptMarketing: formData.acceptMarketing
       };
 
-      const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ const useRegister = () => {
     } finally {
       setLoading(false);
     }
-  }, [API_BASE_URL]);
+  }, [import.meta.env.VITE_API_URL]);
 
   // Función para limpiar el estado
   const reset = useCallback(() => {

@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MapPin, Loader2, DollarSign, Maximize, ChevronDown, ChevronUp, GraduationCap, Heart, ShoppingCart, Bus, TreePine, Pill, Building2, Star, CheckCircle2 } from 'lucide-react';
 import { Header } from '@/MainPage/Header';
 import { useAuth } from '@/routes/AuthProvider';
 
 const TerrenosMap = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const userId = user?.id || null;
 
   const [terrenos, setTerrenos] = useState([]);
@@ -23,7 +25,7 @@ const TerrenosMap = () => {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recommendations`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ user_id:'68e41f2d874abe0c14b860ba' })
+          body: JSON.stringify({ user_id:userId })
         });
 
         const data = await res.json();
@@ -60,10 +62,9 @@ const TerrenosMap = () => {
     if (userId) {
       fetchRecs();
     } else {
-      // si no hay userId, opcional: llamar sin userId o dejar vacío
       setLoading(false);
     }
-  }, [userId]);
+  }, []);
 
   // Inicializar mapa con Leaflet (mantengo tu lógica)
   useEffect(() => {
@@ -152,6 +153,15 @@ const TerrenosMap = () => {
       });
     }
   };
+
+  const goToTerreno = (terreno) => {
+    if (terreno.id_terreno) {
+      navigate(`/terreno/${terreno.id_terreno}`);
+    } else {
+      console.warn('No se encontró ID del terreno');
+    }
+  };
+
 
   const toggleExpanded = (terrenoId) => {
     setExpandedTerreno(expandedTerreno === terrenoId ? null : terrenoId);
@@ -269,7 +279,15 @@ const TerrenosMap = () => {
                           </div>
                         </div>
 
-                        <button onClick={(e) => { e.stopPropagation(); irATerreno(terreno); }} className="w-full py-3 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg">Ver ubicación en el mapa</button>
+                        <button 
+                          onClick={(e) => { 
+                            e.stopPropagation(); 
+                            goToTerreno(terreno); 
+                          }} 
+                          className="w-full py-3 px-4 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700 transition-colors shadow-md hover:shadow-lg"
+                        >
+                          Ver Terreno Completo
+                        </button>
                       </div>
                     )}
                   </div>

@@ -14,8 +14,9 @@ export const CompararTerrenos = () => {
 
   const { compareList } = useCompare();
 
-  const renderCheckIcon = (value) => {
-    return value ? (
+  const renderCheckIcon = (servicios, servicio) => {
+    const existe = servicios?.includes(servicio);
+    return existe ? (
       <span className='flex justify-center'><Check className="text-green-500 w-6 h-6" /></span>
     ) : (
       <span className='flex justify-center'><X className="text-red-500 w-6 h-6" /></span>
@@ -121,7 +122,7 @@ export const CompararTerrenos = () => {
                 <td>Agua Potable</td>
                 {displayedTerrenos.map((terreno) => (
                   <td key={terreno._id} className="property-column">
-                    {renderCheckIcon(terreno.servicios?.agua_potable)}
+                    {renderCheckIcon(terreno.servicios, "Agua potable")}
                   </td>
                 ))}
               </tr>
@@ -130,16 +131,7 @@ export const CompararTerrenos = () => {
                 <td>Calles Empedradas</td>
                 {displayedTerrenos.map((terreno) => (
                   <td key={terreno._id} className="property-column">
-                    {renderCheckIcon(terreno.servicios?.calles_empedradas)}
-                  </td>
-                ))}
-              </tr>
-
-              <tr>
-                <td>Calles Enripiadas</td>
-                {displayedTerrenos.map((terreno) => (
-                  <td key={terreno._id} className="property-column">
-                    {renderCheckIcon(terreno.servicios?.calles_enripiadas)}
+                    {renderCheckIcon(terreno.servicios, "Empedrado")}
                   </td>
                 ))}
               </tr>
@@ -148,16 +140,7 @@ export const CompararTerrenos = () => {
                 <td>Electricidad</td>
                 {displayedTerrenos.map((terreno) => (
                   <td key={terreno._id} className="property-column">
-                    {renderCheckIcon(terreno.servicios?.electricidad)}
-                  </td>
-                ))}
-              </tr>
-
-              <tr>
-                <td>Pórtico de Seguridad</td>
-                {displayedTerrenos.map((terreno) => (
-                  <td key={terreno._id} className="property-column">
-                    {renderCheckIcon(terreno.servicios?.portico_seguridad)}
+                    {renderCheckIcon(terreno.servicios, "Electricidad")}
                   </td>
                 ))}
               </tr>
@@ -166,7 +149,7 @@ export const CompararTerrenos = () => {
                 <td>Zona Poblada</td>
                 {displayedTerrenos.map((terreno) => (
                   <td key={terreno._id} className="property-column">
-                    {renderCheckIcon(terreno.servicios?.zona_poblada)}
+                    {renderCheckIcon(terreno.servicios, "Zona poblada")}
                   </td>
                 ))}
               </tr>

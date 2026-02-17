@@ -211,7 +211,7 @@ export const MapContainer = ({ selectedProperty }) => {
         
       </div>
       
-      <style jsx>{`
+      <style>{`
         .leaflet-popup-content-wrapper {
           background: #374151 !important;
           color: #fff !important;

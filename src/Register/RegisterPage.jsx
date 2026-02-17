@@ -85,21 +85,6 @@ export const RegisterPage = () => {
     try {
       const result = await register(formData);
       
-      if (result.success) {
-        // setFormData({
-        //   firstName: '',
-        //   lastName: '',
-        //   email: '',
-        //   phone: '',
-        //   password: '',
-        //   confirmPassword: '',
-        //   userType: 'buyer',
-        //   acceptTerms: false,
-        //   acceptMarketing: false
-        // });
-        null;
-      }
-      console.log(formData.email);
       navigate('/preVerify-email', { state: { email: formData.email } });
     } catch (error) {
       console.error('Error during registration:', error);

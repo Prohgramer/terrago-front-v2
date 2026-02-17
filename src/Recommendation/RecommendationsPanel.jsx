@@ -6,7 +6,6 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { RecommendationCard } from "./RecommendationCard";
 
 export const RecommendationsPanel = ({ userId }) => {
-    console.log("UserID in RecommendationsPanel:", userId);
   const [loading, setLoading] = useState(true);
   const [recommendations, setRecommendations] = useState([]);
   const [error, setError] = useState(null);
