@@ -14,7 +14,6 @@ export const useTerrainDetail = (id) => {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/api/resultados/${id}`);
         if (!response.ok) throw new Error('No se pudo obtener el terreno');
         const data = await response.json();
-        console.log('Terrain data fetched:', data);
         setTerrain(data);
       } catch (err) {
         setError(err.message);
