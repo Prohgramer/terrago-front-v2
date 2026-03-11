@@ -55,12 +55,12 @@
         td:first-child {
             font-weight: 600;
             color: #495057;
-            width: 20%;
+            width: 15%;
         }
         
         .property-column {
             text-align: center;
-            width: 40%;
+            width: 28%;
             color: #343a40;
         }
         

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Check, X } from 'lucide-react';
-import { useCompare } from './contexto/CompareContext';
+import { useCompare } from './context/CompareContext';
 import './comparadorTerrenos.css';
 import { formatearGuaranies } from './utils/formatters';
 

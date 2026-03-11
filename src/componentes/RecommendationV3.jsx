@@ -44,7 +44,12 @@ const TerrenosMap = () => {
             compatibilidad: r.compatibilidad ?? 'Media',
             resumen: r.resumen ?? '',
             motivos_principales: r.motivos_principales ?? r.motives ?? [],
-            entorno_y_servicios: r.entorno_y_servicios ?? r.services ?? []
+            entorno_y_servicios: r.entorno_y_servicios ?? r.services ?? [],
+            // Nuevos campos de análisis de precio
+            analisis_precio: r.analisis_precio ?? {
+              justificacion_precio: '',
+              posicion_precio: 'Promedio'
+            }
           }));
           setTerrenos(mapped);
         } else {
@@ -276,6 +281,29 @@ const TerrenosMap = () => {
                                 </div>
                               );
                             })}
+                          </div>
+                        </div>
+
+                        <div>
+                          <h4 className="font-bold text-gray-900 mb-3 flex items-center"><DollarSign className="w-5 h-5 mr-2 text-green-600" />Análisis de Precio</h4>
+                          <div className="space-y-3">
+                            <div className="bg-white p-4 rounded-lg border border-gray-200">
+                              <div className="flex items-center justify-between mb-2">
+                                <span className="text-sm font-semibold text-gray-700">Posición de precio:</span>
+                                <span className={`text-xs font-bold px-3 py-1 rounded-full ${
+                                  terreno.analisis_precio?.posicion_precio === 'Por encima del promedio' 
+                                    ? 'bg-amber-100 text-amber-700'
+                                    : terreno.analisis_precio?.posicion_precio === 'Por debajo del promedio'
+                                    ? 'bg-green-100 text-green-700'
+                                    : 'bg-blue-100 text-blue-700'
+                                }`}>
+                                  {terreno.analisis_precio?.posicion_precio || 'Promedio'}
+                                </span>
+                              </div>
+                              <p className="text-sm text-gray-700 leading-relaxed">
+                                {terreno.analisis_precio?.justificacion_precio || 'Sin análisis disponible'}
+                              </p>
+                            </div>
                           </div>
                         </div>
 

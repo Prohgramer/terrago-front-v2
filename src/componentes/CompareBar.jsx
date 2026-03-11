@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useCompare } from '@/contexto/CompareContext';
+import { useCompare } from '@/context/CompareContext';
 
 export const CompareBar = () => {
   const { compareList, clearCompareList, showCompareBar } = useCompare();

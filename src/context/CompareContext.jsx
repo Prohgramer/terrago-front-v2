@@ -20,8 +20,8 @@ export function CompareProvider({ children }) {
         return newList;
       }
       
-      if (prev.length >= 2) {
-        toast.error('Maximo 2 terrenos para comparar');
+      if (prev.length >= 3) {
+        toast.error('Maximo 3 terrenos para comparar');
         return prev;
       }
       
